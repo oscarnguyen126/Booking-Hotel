@@ -1,6 +1,5 @@
 from django.urls import path
 from booking_app import views
-from rest_framework.urlpatterns import format_suffix_patterns
 
 
 urlpatterns = [
@@ -9,5 +8,3 @@ urlpatterns = [
     path('facility/', views.FacilityList.as_view()),
     path('facility/<int:pk>', views.FacilityDetail.as_view()),
 ]
-
-urlpatterns = format_suffix_patterns(urlpatterns)

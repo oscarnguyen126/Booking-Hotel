@@ -7,7 +7,7 @@ class RoomInfo(models.Model):
     roomsize = models.IntegerField(default=30)
     price = models.FloatField()
     facilities = models.ManyToManyField('RoomFacility', blank=True)
-    img = models.BinaryField()
+    img = models.TextField()
 
     def __str__(self):
         return self.name
