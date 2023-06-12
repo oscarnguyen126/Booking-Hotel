@@ -2,17 +2,13 @@
 import Modal from './Modal.vue'
 import { convertBase64 } from '../utils'
 export default {
-  props: ['createRoom', 'formisOpen', 'listFacs'],
   components: { Modal },
+  props: ['updateRoom', 'room', 'isOpen', 'listFacs', 'updateRoom', 'toggleModalUpdateRoom'],
   data() {
     return {
       form: {
-        name: "",
-        description: "",
-        price: 0,
-        img: null,
-        facilities: [],
-        roomsize: 0,
+        ...this.room,
+        facilities: this.room.facilities.map(e => e.name)
       },
     }
   },
@@ -25,13 +21,17 @@ export default {
         this.form.img = base64img;
       }
     },
+    onSubmit() {
+      this.updateRoom(this.room.id, this.form)
+      this.toggleModalUpdateRoom()
+    }
   }
 }
 </script>
 
 <template>
-  <Modal :isOpen="this.formisOpen">
-    <form class="form" @submit.prevent="createRoom(form)">
+  <Modal :isOpen="this.isOpen">
+    <form class="form" @submit.prevent="onSubmit">
       <div>
         <div class="input-group">
           <label class="input-label" for="name">Room name</label>
@@ -70,43 +70,8 @@ export default {
         </div>
       </div>
       <div class="submit-container">
-        <button class="create-button" type="submit" name="create">Submit</button>
+        <button class="create-button" type="submit" name="update" @click="toggleModalUpdateRoom">Update</button>
       </div>
     </form>
   </Modal>
 </template>
-
-<style>
-.facility-checkbox-group {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.facility-checkbox-input {
-  width: 50%;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.submit-container {
-  display: flex;
-  flex-grow: 1;
-  justify-content: center;
-  align-items: end;
-}
-
-.input-group {
-  padding-bottom: 12px;
-  display: flex;
-  flex-direction: column;
-}
-
-.input-label {
-  font-weight: 600;
-  font-size: 16px;
-}
-</style>
