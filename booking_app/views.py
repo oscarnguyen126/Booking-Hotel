@@ -2,8 +2,6 @@ from .models import RoomFacility, RoomInfo
 from .serializers import RoomSerializer, FacilitySerializer
 from rest_framework import generics
 from rest_framework.response import Response
-from django.http import JsonResponse, HttpResponse
-from rest_framework.parsers import JSONParser
 
 # TODO: double check mutative fn
 #   [] validate registered fields

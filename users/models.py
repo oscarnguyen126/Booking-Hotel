@@ -4,10 +4,8 @@ from django.contrib.auth.models import AbstractUser, _
 
 class User(AbstractUser):
     email = models.EmailField(_("email address"), unique=True)
-    first_name = models.CharField(_("first name"), max_length=150, blank=True)
-    last_name = models.CharField(_("last name"), max_length=150, blank=True)
-    email = models.EmailField(_("email address"), blank=True)
-    password = models.CharField(_("password"), max_length=20)
+    username = models.CharField(_("username"), max_length=200, unique=True)
+    password = models.CharField(_("password"))
     is_staff = models.BooleanField(
         "staff status",
         default=False,

@@ -40,7 +40,16 @@ INSTALLED_APPS = [
     "booking_app",
     "rest_framework",
     "corsheaders",
-    "user_manager",
+    "users",
+    "auth",
+]
+
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.ScryptPasswordHasher",
 ]
 
 MIDDLEWARE = [
@@ -137,4 +146,4 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTH_USER_MODEL = "user_manager.User"
+AUTH_USER_MODEL = "users.User"
