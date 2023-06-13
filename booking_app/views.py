@@ -13,6 +13,9 @@ class RoomList(generics.ListCreateAPIView):
     serializer_class = RoomSerializer
 
     def list(self, request):
+        # if current user -> execute code
+        # else raise unauthorized exception
+        print(request.user)
         queryset = self.get_queryset()
         serializer = RoomSerializer(queryset, many=True)
         return Response(serializer.data)

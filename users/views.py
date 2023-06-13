@@ -1,17 +1,20 @@
 from .models import User
-from .serializers import UserSerializer, UserDetailSerializer
+from .serializers import UserSerializer, UserUpdateSerializer, UserListSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
-import bcrypt
 from django.shortcuts import get_object_or_404
+from django.contrib.auth import authenticate, login
 
 
 class UserList(APIView):
     def get(self, request):
+        print(request.user)
+        print(request.session.keys())
+
         users = User.objects.all()
         return Response(
-            UserSerializer(users, many=True).data, status=status.HTTP_200_OK
+            UserListSerializer(users, many=True).data, status=status.HTTP_200_OK
         )
 
     def post(self, request):
@@ -21,11 +24,7 @@ class UserList(APIView):
 
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            salt = bcrypt.gensalt()
-            serializer.password = bcrypt.hashpw(
-                request.data["password"].encode("utf-8"), salt
-            )
-            serializer.save()
+            user = serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
@@ -34,13 +33,18 @@ class UserDetails(APIView):
         return get_object_or_404(User, pk=pk)
 
     def get(self, request, pk):
+        print(request.session["current_user_id"])
         user = self.get_object(pk=pk)
-        serializer = UserSerializer(user)
+        login(request, user)
+        print(request.session.items())
+        print(type(request.user))
+
+        serializer = UserListSerializer(user)
         return Response(serializer.data)
 
     def put(self, request, pk):
         user = self.get_object(pk=pk)
-        serializer = UserDetailSerializer(user, data=request.data)
+        serializer = UserUpdateSerializer(user, data=request.data)
 
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

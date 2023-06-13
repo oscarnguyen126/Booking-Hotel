@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     "users",
-    "auth",
+    "auths",
 ]
 
 PASSWORD_HASHERS = [

@@ -1,6 +1,6 @@
 from .models import User
 from rest_framework import serializers
-import bcrypt
+from django.contrib.auth.hashers import make_password
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -15,22 +15,35 @@ class UserSerializer(serializers.ModelSerializer):
             "is_active",
         ]
 
+    def create(self, validated_data):
+        return User.objects.create(
+            email=validated_data["email"],
+            username=validated_data["username"],
+            password=make_password(validated_data["password"]),
+        )
 
-class UserDetailSerializer(serializers.Serializer):
+
+class UserListSerializer(serializers.Serializer):
+    username = serializers.CharField(max_length=255, required=False, allow_null=True)
+    is_staff = serializers.BooleanField()
+    is_active = serializers.BooleanField()
+
+
+class UserUpdateSerializer(serializers.Serializer):
     new_password = serializers.CharField(
-        max_length=255, write_only=True, min_length=6, required=False, allow_null=True
+        max_length=255, min_length=6, write_only=True, required=False, allow_null=True
     )
     username = serializers.CharField(max_length=255, required=False, allow_null=True)
+    is_staff = serializers.BooleanField()
+    is_active = serializers.BooleanField()
 
     def update(self, instance, validated_data):
-        if validated_data.get("new_password", None):
-            salt = bcrypt.gensalt()
-            validated_data["password"] = bcrypt.hashpw(
-                validated_data["new_password"].encode("utf-8"), salt
-            )
+        if validated_data.get("new_password"):
+            instance.password = make_password(validated_data["new_password"])
 
-        for data in validated_data:
-            setattr(instance, data, validated_data[data])
+        instance.username = validated_data["username"]
+        instance.is_staff = validated_data["is_staff"]
+        instance.is_active = validated_data["is_active"]
 
         instance.save()
         return instance
