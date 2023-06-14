@@ -1,19 +1,16 @@
 <script>
 export default {
-  props: ['isOpen'],
-}
-
+  props: ["isOpen"],
+};
 </script>
 
-
 <template>
-  <div class="backdrop">
-    <div class="modal" v-if="this.isOpen">
+  <div class="backdrop" v-if="this.isOpen">
+    <div class="modal">
       <slot />
     </div>
   </div>
 </template>
-
 
 <style>
 .modal {

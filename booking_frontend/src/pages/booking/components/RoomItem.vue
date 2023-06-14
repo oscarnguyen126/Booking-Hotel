@@ -1,31 +1,31 @@
 <script>
-import DetailRoomModal from './DetailRoomModal.vue'
-import UpdateRoomModal from './UpdateRoomModal.vue'
+import DetailRoomModal from "./DetailRoomModal.vue";
+import UpdateRoomModal from "./UpdateRoomModal.vue";
 export default {
-  props: ['room', 'deleteRoom', 'updateRoom', 'listFacs'],
+  props: ["room", "deleteRoom", "updateRoom", "facilities"],
   components: {
-    DetailRoomModal, UpdateRoomModal
+    DetailRoomModal,
+    UpdateRoomModal,
   },
   data() {
     return {
       isModalDetailRoomOpen: false,
       isModalUpdateRoomOpen: false,
-    }
+    };
   },
   methods: {
     showDetail() {
-      this.toggleModalDetailRoom()
+      this.toggleModalDetailRoom();
     },
     toggleModalDetailRoom() {
       this.isModalDetailRoomOpen = !this.isModalDetailRoomOpen;
     },
     toggleModalUpdateRoom() {
       this.isModalUpdateRoomOpen = !this.isModalUpdateRoomOpen;
-    }
-  }
-}
+    },
+  },
+};
 </script>
-
 
 <template>
   <div class="room" @click="showDetail">
@@ -37,20 +37,26 @@ export default {
       </div>
       <div class="btn-wrapper">
         <button class="remove" @click.stop="deleteRoom(room.id)">Remove</button>
-        <button class="remove" @click.stop="toggleModalUpdateRoom">Update</button>
+        <button class="remove" @click.stop="toggleModalUpdateRoom">
+          Update
+        </button>
       </div>
     </div>
   </div>
 
-  <div v-if="isModalDetailRoomOpen">
-    <DetailRoomModal :isOpen="isModalDetailRoomOpen" :room="this.room" @click.self="toggleModalDetailRoom" />
-  </div>
-  <div v-if="isModalUpdateRoomOpen">
-    <UpdateRoomModal :isOpen="isModalUpdateRoomOpen" :room="this.room" :listFacs="this.listFacs" :updateRoom="updateRoom"
-      :toggleModalUpdateRoom="toggleModalUpdateRoom" />
-  </div>
+  <DetailRoomModal
+    :isOpen="isModalDetailRoomOpen"
+    :room="this.room"
+    @click.self="toggleModalDetailRoom"
+  />
+  <UpdateRoomModal
+    :isOpen="isModalUpdateRoomOpen"
+    :room="this.room"
+    :facilities="this.facilities"
+    :updateRoom="updateRoom"
+    :toggleModalUpdateRoom="toggleModalUpdateRoom"
+  />
 </template>
-
 
 <style>
 .room {

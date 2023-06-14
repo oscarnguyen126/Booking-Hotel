@@ -1,8 +1,5 @@
 import json
-from django.shortcuts import render
-from users.models import User
 from django.contrib.auth import authenticate, login, logout
-from rest_framework.response import Response
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
@@ -17,7 +14,7 @@ def login_page(request):
     user = authenticate(request, username=username, password=password)
     if user is not None:
         login(request, user)
-        return HttpResponse(json.dumps({"msg": "Login successful"}))
+        return HttpResponse(json.dumps({"current_user_id": user.id}))
     else:
         return HttpResponse({"msg": "Invalid username or password"})
 

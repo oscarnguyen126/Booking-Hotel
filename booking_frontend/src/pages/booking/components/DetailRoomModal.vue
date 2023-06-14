@@ -1,16 +1,11 @@
 <script>
-import Modal from './Modal.vue'
-
+import Modal from "../../../components/Modal.vue";
 
 export default {
-  props: ['room', 'isOpen'],
-  components: { Modal },
-  mounted() {
-    console.log('detail setup', this.room.facilities)
-  }
-}
+  props: ["room", "isOpen"],
+  components: { Modal, Modal },
+};
 </script>
-
 
 <template>
   <Modal :isOpen="this.isOpen">
@@ -18,7 +13,10 @@ export default {
     <p class="room-description">{{ this.room.description }}</p>
     <ul>
       <li>
-        <p><span class="information-title">Room size:</span> {{ this.room.roomsize }} m2</p>
+        <p>
+          <span class="information-title">Room size:</span>
+          {{ this.room.roomsize }} m2
+        </p>
       </li>
       <li>
         <p class="information-title">Facilities:</p>
@@ -39,7 +37,6 @@ export default {
   </Modal>
 </template>
 
-
 <style>
 .room-facility-container {
   display: flex;
@@ -59,7 +56,15 @@ export default {
   display: flex;
   font-weight: bold;
   flex-direction: row-reverse;
-  background: linear-gradient(90deg, #ff0000, #ffff00, #ff00f3, #0033ff, #ff00c4, #ff0000);
+  background: linear-gradient(
+    90deg,
+    #ff0000,
+    #ffff00,
+    #ff00f3,
+    #0033ff,
+    #ff00c4,
+    #ff0000
+  );
   background-size: 200%;
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
