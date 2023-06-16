@@ -21,7 +21,7 @@ export default {
   border-radius: 10px;
   color: white;
   text-align: start;
-  border: 1px solid purple;
+  box-shadow: 0 0 20px #d84cba;
 
   overflow-y: scroll;
   overflow-x: hidden;

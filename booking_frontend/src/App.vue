@@ -14,6 +14,7 @@ export default {
   mounted() {
     const isAuthenticated =
       window.localStorage.getItem(STORED_USER_KEY) || false;
+      console.log(window.localStorage.getItem(STORED_USER_KEY))
 
     if (isAuthenticated) {
       this.$router.push("/");

@@ -19,7 +19,7 @@ export default {};
     #ff00c4,
     #ff0000
   );
-  background-size: 400%;
+  background-size: 300%;
   font-size: 70px;
   font-family: sans-serif;
   letter-spacing: 5px;
@@ -38,11 +38,5 @@ export default {};
   10% {
     background-position: 400%;
   }
-}
-
-.create-button {
-  margin-top: 1%;
-  background-color: blueviolet;
-  border: 1px solid purple;
 }
 </style>

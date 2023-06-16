@@ -3,7 +3,7 @@ import Modal from "../../../components/Modal.vue";
 import { convertBase64 } from "../../../utils";
 
 export default {
-  props: ["createRoom", "isOpen", "facilities"],
+  props: ["createRoom", "isOpen", "facilities", "toggleModalCreateRoom"],
   components: { Modal },
   data() {
     return {
@@ -106,8 +106,14 @@ export default {
         </div>
       </div>
       <div class="submit-container">
-        <button class="create-button" type="submit" name="create">
-          Submit
+        <button class="btn-create" type="submit" name="create">Submit</button>
+        <button
+          class="btn-cancel"
+          type="submit"
+          name="cancel"
+          @click="toggleModalCreateRoom"
+        >
+          Cancel
         </button>
       </div>
     </form>
@@ -146,5 +152,19 @@ export default {
 .input-label {
   font-weight: 600;
   font-size: 16px;
+}
+.btn-cancel {
+  border-radius: 30px;
+  background-image: linear-gradient(
+    to right,
+    #ff0084 0%,
+    #33001b 51%,
+    #ff0084 100%
+  );
+  background-size: 200% auto;
+  margin-left: 1%;
+}
+.btn-cancel:hover {
+  box-shadow: 0 0 20px #eee;
 }
 </style>

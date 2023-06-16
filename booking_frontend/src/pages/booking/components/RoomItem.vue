@@ -29,18 +29,21 @@ export default {
 
 <template>
   <div class="room" @click="showDetail">
-    <img :src="room.img" class="room-image" />
     <div class="room-container">
-      <div>
+      <img :src="room.img" class="room-image" />
+      <div class="content">
         <p class="room-title">{{ room.name }}</p>
+        <div class="line"></div>
         <p class="room-description">{{ room.description }}</p>
       </div>
-      <div class="btn-wrapper">
-        <button class="remove" @click.stop="deleteRoom(room.id)">Remove</button>
-        <button class="remove" @click.stop="toggleModalUpdateRoom">
-          Update
-        </button>
-      </div>
+    </div>
+    <div class="btn-wrapper">
+      <button class="btn-remove" @click.stop="deleteRoom(room.id)">
+        Remove
+      </button>
+      <button class="btn-update" @click.stop="toggleModalUpdateRoom">
+        Update
+      </button>
     </div>
   </div>
 
@@ -66,12 +69,12 @@ export default {
   margin: 2% auto 0;
   background: rgba(0, 0, 0, 0.5);
   border-radius: 5px;
-  border: 1px solid purple;
 }
 
 .room-image {
   width: 215px;
   height: 215px;
+  margin-right: 1%;
 }
 
 .roomDetail {
@@ -81,25 +84,42 @@ export default {
   margin-left: 40em;
 }
 
-.remove {
-  background-color: blueviolet;
-  color: black;
+.btn-remove,
+.btn-update {
+  background-image: linear-gradient(
+    to right,
+    #ff0084 0%,
+    #33001b 51%,
+    #ff0084 100%
+  );
+  background-size: 200% auto;
   border: 1px solid purple;
-  border-radius: 5px;
-  margin: 10px;
+  border-radius: 20px;
+  margin: 10px 5px;
   color: white;
+}
+
+.btn-remove:hover,
+.btn-update:hover {
+  box-shadow: 0 0 20px #eee;
 }
 
 .btn-wrapper {
   display: flex;
+  justify-content: flex-end;
   flex-direction: row-reverse;
-  flex-grow: 2;
   align-items: end;
+  width: 10%;
 }
 
 .room-container {
   flex-grow: 1;
   display: flex;
+  float: right;
+}
+
+.room:hover {
+  box-shadow: 0 0 20px #e908e9;
 }
 
 .room-description {
@@ -108,6 +128,13 @@ export default {
 
 .room-title {
   font-weight: bold;
-  border-bottom: 1px solid purple;
+  margin-bottom: 0;
+}
+.line {
+  height: 1px;
+  background: white;
+}
+.content {
+  width: 100%;
 }
 </style>

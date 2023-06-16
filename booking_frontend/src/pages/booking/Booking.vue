@@ -22,6 +22,10 @@ export default {
     }
   },
   methods: {
+    logout() {
+      localStorage.clear();
+      this.$router.push({name:'login'})
+    },
     toggleModalCreateRoom() {
       this.isModalCreateRoomOpen = !this.isModalCreateRoomOpen;
     },
@@ -32,7 +36,6 @@ export default {
       this.facilities = await bookingService.getFacilities();;
     },
     async createRoom(data) {
-      // TODO: validate me
       validate(data)
       try {
         await bookingService.createRoom(data)
@@ -65,6 +68,7 @@ export default {
 </script>
 
 <template>
+  <button class="btn-logout" @click="logout">Logout</button>
   <div v-for="room in rooms">
     <RoomItem
       :room="room"
@@ -77,11 +81,47 @@ export default {
     :isOpen="isModalCreateRoomOpen"
     :facilities="facilities"
     :createRoom="createRoom"
+    :toggleModalCreateRoom="toggleModalCreateRoom"
     @click.self="toggleModalCreateRoom"
   />
-  <button class="create-button" @click="toggleModalCreateRoom">
+  <button class="btn-create" @click="toggleModalCreateRoom">
     Create new room
   </button>
 </template>
 
-<style scope></style>
+<style>
+.btn-logout {
+  position: absolute;
+  top: 1%;
+  right: 2%;
+  border-radius: 30px;
+  background-image: linear-gradient(
+    to right,
+    #ff0084 0%,
+    #33001b 51%,
+    #ff0084 100%
+  );
+  background-size: 200% auto;
+}
+.btn-logout:hover {
+  box-shadow: 0 0 20px #eee;
+}
+.btn-create {
+  margin-top: 1%;
+  background-color: blueviolet;
+  border: 1px solid purple;
+  background-image: linear-gradient(
+    to right,
+    #ff0084 0%,
+    #33001b 51%,
+    #ff0084 100%
+  );
+  text-align: center;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 20px;
+}
+.btn-create:hover {
+  box-shadow: 0 0 20px #eee;
+}
+</style>

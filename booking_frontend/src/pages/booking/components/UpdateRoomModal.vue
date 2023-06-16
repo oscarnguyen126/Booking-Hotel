@@ -113,7 +113,7 @@ export default {
       </div>
       <div class="submit-container">
         <button
-          class="create-button"
+          class="btn-update"
           type="submit"
           name="update"
           @click="toggleModalUpdateRoom"
@@ -124,3 +124,24 @@ export default {
     </form>
   </Modal>
 </template>
+
+<style>
+.btn-update {
+  margin-top: 1%;
+  background-color: blueviolet;
+  border: 1px solid purple;
+  background-image: linear-gradient(
+    to right,
+    #ff0084 0%,
+    #33001b 51%,
+    #ff0084 100%
+  );
+  text-align: center;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 20px;
+}
+.btn-update:hover {
+  box-shadow: 0 0 20px #eee;
+}
+</style>

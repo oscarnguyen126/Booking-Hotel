@@ -32,6 +32,7 @@ export default {
     </div>
     <p class="room-price">$ {{ this.room.price }} for 1 night</p>
     <div class="btn-wrapper">
+      <button id="cancel">Cancel</button>
       <button id="reserve">Reserve</button>
     </div>
   </Modal>
@@ -77,9 +78,20 @@ export default {
   }
 }
 
-#reserve {
+#reserve,
+#cancel {
   color: white;
-  background-color: blueviolet;
+  background-image: linear-gradient(
+    to right,
+    #ff0084 0%,
+    #33001b 51%,
+    #ff0084 100%
+  );
+  background-size: 200% auto;
   margin: 1%;
+}
+#reserve:hover,
+#cancel:hover {
+  box-shadow: 0 0 20px #eee;
 }
 </style>

@@ -2,6 +2,7 @@ import json
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 
 
 @csrf_exempt
@@ -16,23 +17,10 @@ def login_page(request):
         login(request, user)
         return HttpResponse(json.dumps({"current_user_id": user.id}))
     else:
-        return HttpResponse({"msg": "Invalid username or password"})
+        return JsonResponse({"msg": "Invalid username or password"})
 
 
 @csrf_exempt
 def logout_page(request):
     logout(request)
     return HttpResponse(json.dumps({"msg": "Logout successful"}))
-
-
-# verify User
-#    user = authenticate(request, username=username, password=password)
-#    if user: <class 'users.models.User'>
-#       login(request, user)
-#    else:
-#       raise exception
-
-
-# login
-# logout
-#    session.flush()
